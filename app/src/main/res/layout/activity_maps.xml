@@ -10,11 +10,14 @@
     TODO: Ensure functionality after updating the Google Maps API Key
     -->
     <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Maps.MapsActivity" />
+        android:id="@+id/map"
+        tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
+
 
     <!--
     TODO: Add a drop FAB to drop the user's visiting card in the currently location (To the cloud using POST method)

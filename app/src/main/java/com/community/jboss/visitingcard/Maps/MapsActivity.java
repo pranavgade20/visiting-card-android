@@ -1,6 +1,7 @@
 package com.community.jboss.visitingcard.Maps;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentActivity;
@@ -12,21 +13,26 @@ import android.widget.Toast;
 import com.community.jboss.visitingcard.R;
 import com.community.jboss.visitingcard.VisitingCard.ViewVisitingCard;
 import com.community.jboss.visitingcard.VisitingCard.VisitingCardActivity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
 
         View bottomSheet = findViewById(R.id.bottom_sheet);
         final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
@@ -51,6 +57,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //TODO: Implement geo-fencing(NOT AS A WHOLE) just visual representation .i.e., a circle of an arbitrary radius with the PIN being the centre of it.
         //TODO: Make the circle color as @color/colorAccent
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            double lat = location.getLatitude();
+                            double lon = location.getLongitude();
+                            LatLng locn = new LatLng(lat, lon);
+                            mMap.addMarker(new MarkerOptions().position(locn).title("Marker in Delhi!"));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(locn));
+                        } else {
+                            Toast myToast = Toast.makeText(getApplicationContext(), "Error getting location!", Toast.LENGTH_LONG);
+                            myToast.show();
+                        }
+                    }
+                });
     }
 
 
@@ -58,8 +82,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        // Add a marker in Delhi, and move the camera.
+        LatLng delhi = new LatLng(29, 77);
+        mMap.addMarker(new MarkerOptions().position(delhi).title("Marker in Delhi!"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(delhi));
     }
 }

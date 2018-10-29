@@ -3,10 +3,11 @@
     package="com.community.jboss.visitingcard">
 
     <!--
-        TODO: Add location/GPS access permissions
         TODO: Change the Label of the Activities according to the Activity's context
         TODO: Change App Icon .i.e., ic_launcher
     -->
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
