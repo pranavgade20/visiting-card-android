@@ -7,9 +7,10 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.community.jboss.visitingcard.R;
 import com.community.jboss.visitingcard.VisitingCard.ViewVisitingCard;
 import com.community.jboss.visitingcard.VisitingCard.VisitingCardActivity;
@@ -28,6 +29,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
 
+    public static String[] getListViewElements() {
+        String[] ret = {
+                "Item 1",
+                "Item 2",
+                "Item 3",
+                "Item 4",
+                "Item 5",
+                "Item 6",
+                "Item 7",
+                "Item 8",
+                "Item 9",
+                "Item 10",
+        };
+
+        return ret;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +55,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         View bottomSheet = findViewById(R.id.bottom_sheet);
         final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
 
-        // TODO: Replace the TextView with a ListView containing list of Visiting cards in that locality using geo-fencing
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_listview, getListViewElements());
+
+        ListView list_item = (ListView) findViewById(R.id.list_item);
+        list_item.setAdapter(adapter);
 
         // TODO: List item click should result in launching of ViewVisitingCard Acitivity with the info of the tapped Visiting card.
 
-        TextView list_item = findViewById(R.id.list_item);
-        list_item.setOnClickListener(new View.OnClickListener() {
+        TextView near_text = (TextView) findViewById(R.id.cardsNearMeText);
+        near_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent toVisitingCardView = new Intent(MapsActivity.this, ViewVisitingCard.class);

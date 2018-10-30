@@ -19,6 +19,7 @@
         android:weightSum="3">
 
         <TextView
+            android:id="@+id/cardsNearMeText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -46,16 +47,9 @@
       TODO: Replace the below TextView with a ListView containing VisitingCards in that GeoFenced Location.
     -->
 
-    <TextView
+    <ListView
         android:id="@+id/list_item"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="10dp"
-        android:background="#000"
-        android:padding="8dp"
-        android:text="Add List View here"
-        android:textAlignment="center"
-        android:textColor="#fff"
-        android:textSize="20sp" />
+        android:layout_height="300dp" />
 
 </LinearLayout>
