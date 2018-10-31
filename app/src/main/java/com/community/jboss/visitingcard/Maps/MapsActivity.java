@@ -7,6 +7,7 @@ import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,24 +25,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
 
-    public static String[] getListViewElements() {
-        String[] ret = {
-                "Item 1",
-                "Item 2",
-                "Item 3",
-                "Item 4",
-                "Item 5",
-                "Item 6",
-                "Item 7",
-                "Item 8",
-                "Item 9",
-                "Item 10",
-        };
+    public static ArrayList<ListDetails> getListViewElements() {
+        ArrayList<ListDetails> ret = new ArrayList<ListDetails>();
+
+        for (int i = 0; i < 10; i++) {
+            ListDetails listDetails = new ListDetails();
+            listDetails.setName("Name"+i);
+            listDetails.setEmail("email"+i+"@domain.com");
+            ret.add(listDetails);
+        }
 
         return ret;
     }
@@ -55,12 +54,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         View bottomSheet = findViewById(R.id.bottom_sheet);
         final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.activity_listview, getListViewElements());
+        ArrayList<ListDetails> list_details = getListViewElements();
+        final ListView listView = (ListView) findViewById(R.id.list_item);
+        listView.setAdapter(new ListBaseAdapter(this, list_details));
 
-        ListView list_item = (ListView) findViewById(R.id.list_item);
-        list_item.setAdapter(adapter);
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Object obj = listView.getItemAtPosition(i);
+                ListDetails obj_listDetails = (ListDetails) obj;
+                // now you can get all the information you need thru obj_listDetails.get
+            }
+        });
         // TODO: List item click should result in launching of ViewVisitingCard Acitivity with the info of the tapped Visiting card.
+        // for the above, just implement passing of info between intents, the info can be accessed thru the object above.
+
 
         TextView near_text = (TextView) findViewById(R.id.cardsNearMeText);
         near_text.setOnClickListener(new View.OnClickListener() {

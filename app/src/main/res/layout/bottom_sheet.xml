@@ -25,7 +25,7 @@
             android:layout_marginBottom="16dp"
             android:layout_weight="2"
             android:text="Visiting Cards Near Me"
-            android:textColor="#444"
+            android:textColor="@android:color/holo_red_dark"
             android:textSize="18dp"
             android:textStyle="bold" />
 
