@@ -1,7 +1,5 @@
 package com.community.jboss.visitingcard.Maps;
 
-import android.widget.BaseAdapter;
-
 import com.community.jboss.visitingcard.R;
 
 public class ListDetails {

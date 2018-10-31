@@ -1,7 +1,6 @@
 package com.community.jboss.visitingcard.Maps;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 public class ListBaseAdapter extends BaseAdapter {
 
-    private static ArrayList<ListDetails> listDetailsArrayList;
+    private ArrayList<ListDetails> listDetailsArrayList;
     public int imageId = R.drawable.sample_1; // can add add image here
     private LayoutInflater inflater;
 
@@ -65,8 +64,8 @@ public class ListBaseAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        ImageView image;
-        TextView name;
-        TextView email;
+        public ImageView image;
+        public TextView name;
+        public TextView email;
     }
 }

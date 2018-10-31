@@ -2,7 +2,6 @@ package com.community.jboss.visitingcard.Maps;
 
 import android.content.Intent;
 import android.location.Location;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.community.jboss.visitingcard.R;
 import com.community.jboss.visitingcard.VisitingCard.ViewVisitingCard;
-import com.community.jboss.visitingcard.VisitingCard.VisitingCardActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -61,8 +59,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Object obj = listView.getItemAtPosition(i);
-                ListDetails obj_listDetails = (ListDetails) obj;
+                // Object obj = listView.getItemAtPosition(i);
+                // ListDetails obj_listDetails = (ListDetails) obj;
                 // now you can get all the information you need thru obj_listDetails.get
             }
         });
