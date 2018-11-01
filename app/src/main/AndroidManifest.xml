@@ -29,9 +29,7 @@
             </intent-filter>
         </activity>
 
-        <!--
-            TODO: Add Google Maps API key here
-        -->
+        <!--             TODO: Add Google Maps API key here -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -40,7 +38,10 @@
             android:name=".Maps.MapsActivity"
             android:label="@string/title_activity_maps"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity android:name=".VisitingCard.ViewVisitingCard"></activity>
+        <activity android:name=".VisitingCard.ViewVisitingCard" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
     </application>
 
 </manifest>
