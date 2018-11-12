@@ -9,13 +9,70 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
-import com.community.jboss.visitingcard.LoginActivity;
 import com.community.jboss.visitingcard.Maps.MapsActivity;
 import com.community.jboss.visitingcard.R;
 import com.community.jboss.visitingcard.SettingsActivity;
 
+import java.util.ArrayList;
+
 public class VisitingCardActivity extends AppCompatActivity {
+
+    public ArrayList<ListDetail> getListViewElements() {
+        ArrayList<ListDetail> ret = new ArrayList<>();
+        // Make network calls or read from local storage and fill in this arrayList
+
+        ListDetail listDetails = new ListDetail();
+        listDetails.setName("Name");
+        listDetails.setDescription("Name LastName");
+        ret.add(listDetails);
+
+        listDetails = new ListDetail();
+        listDetails.setName("Email");
+        listDetails.setDescription("abc@xyz.com");
+        ret.add(listDetails);
+
+        listDetails = new ListDetail();
+        listDetails.setName("Phone");
+        listDetails.setDescription("0123456789");
+        ret.add(listDetails);
+
+        listDetails = new ListDetail();
+        listDetails.setName("GitHub");
+        listDetails.setDescription("github.com/profileName");
+        ret.add(listDetails);
+
+        listDetails = new ListDetail();
+        listDetails.setName("Linkedin");
+        listDetails.setDescription("linkedin.com/profile");
+        ret.add(listDetails);
+
+        listDetails = new ListDetail();
+        listDetails.setName("Twitter");
+        listDetails.setDescription("twitter.com/profile");
+        ret.add(listDetails);
+
+        return ret;
+    }
+    public void setListElements(){
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                final ListView listView = (ListView) findViewById(R.id.list_view);
+                ArrayList<ListDetail> list_details = getListViewElements();
+                listView.setAdapter(new ListBaseAdapter(getApplicationContext(), list_details));
+
+//                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                    }
+//                });
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +81,9 @@ public class VisitingCardActivity extends AppCompatActivity {
 
         // TODO: Add a ImageView and a number of EditText to get his/her Visiting Card details (Currently authenticated User)
 
-        // TODO: Add profileImage, Name, Email, PhoneNumber, Github, LinkedIn & Twitter Fields.
-
         // TODO: Clicking the ImageView should invoke an implicit intent to take an image using camera / pick an image from the Gallery.
 
-        // TODO: Align FAB to Bottom Right and replace it's icon with a SAVE icon
+        // TODO: Replace FAB icon with a SAVE icon
         // TODO: On Click on FAB should make a network call to store the entered information in the cloud using POST method(Do this in NetworkUtils class)
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +99,8 @@ public class VisitingCardActivity extends AppCompatActivity {
                         }).show();
             }
         });
+
+        setListElements();
 
     }
 
