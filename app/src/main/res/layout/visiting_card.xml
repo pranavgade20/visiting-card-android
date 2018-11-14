@@ -16,6 +16,7 @@
         <ImageView
             android:layout_width="275dp"
             android:layout_height="match_parent"
+            android:id="@+id/user_image"
             android:src="@mipmap/ic_launcher" />
 
         <ListView
